@@ -16,9 +16,9 @@ function Button ({children, className, ...props}){
 Button.propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
-}
+};
 Button.defaultProps = {
     className: ''
-}
+};
 
-export default Button
+export default Button;

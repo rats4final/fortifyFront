@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import api from "../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const withAuth = (WrappedComponent) => {
     const AuthWrapper = (props) => {
+        const navigation = useNavigate();
         const [authenticated, setAuthenticated] = useState(false);
 
         const verifyUser = async () => {
@@ -13,6 +15,7 @@ const withAuth = (WrappedComponent) => {
             } catch (error) {
                 console.log(error);
                 setAuthenticated(false);
+                navigation("/login");
             }
         }
 
@@ -20,10 +23,11 @@ const withAuth = (WrappedComponent) => {
             verifyUser();
         },[]);
 
+
         if (authenticated) {
             return <WrappedComponent {...props} />
         }else{
-            return <h1>You are unauthenticated!</h1>
+            //return navigation("/login");
         }
     }
     return AuthWrapper;
